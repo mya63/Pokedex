@@ -10,6 +10,7 @@
 </head>
 <body onload="init()">
   <header>
+    <div class="header-content">
     <h1>Pokedex</h1>
     <input type="text" id="search" placeholder="Suche Pokémon" oninput="filterPokemon()" />
     <select id="type-filter" onchange="filterByType()">
@@ -33,6 +34,7 @@
       <option value="flying">Flug</option>
       <option value="normal">Normal</option>
     </select>
+    </div>
   </header>
 
   <main id="pokemon-container"></main>

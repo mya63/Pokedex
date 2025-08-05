@@ -2,17 +2,25 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: #f2f2f2;
-  max-width: 1920px;
-  margin-inline: auto;
+  width: 100%;
 }
 
 header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   background: #e3350d;
   color: white;
   padding: 1rem;
+  width: 100%; 
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1440px; 
+  width: 100%;
 }
 
 header input {
@@ -27,7 +35,7 @@ header input {
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 20px;
   padding: 20px;
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
 }
 
