@@ -1,10 +1,14 @@
 let pokedex = {};
 let offset = 0;
-let limit = 40;
+let limit = 150
+let step = 40
+let isFirstLoad = true;
 let isLoading = false;
 let currentPokemonIndex = 0;
 let pokemonKeys = [];
 let filteredPokemonKeys = [];
+let isDataLoaded = false;
+
 
 
 
@@ -21,11 +25,28 @@ async function loadMorePokemon() {
   let res = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`);
   let data = await res.json();
 
-  for (let i = 0; i < data.results.length; i++) await fetchPokemon(data.results[i].name);
+  for (let i = 0; i < data.results.length; i++) {
+    await fetchPokemon(data.results[i].name);
+  }
+
   offset += limit;
+
+
+  if (isFirstLoad) {
+    limit = step;
+    isFirstLoad = false;
+  }
+
   renderPokedex();
   hideLoader();
   isLoading = false;
+}
+
+async function init() {
+  await loadMorePokemon();
+  isDataLoaded = true;
+  ensureScrollable();
+  filterByType();
 }
 
 
@@ -104,21 +125,26 @@ function filterPokemon() {
 }
 
 
-function filterByType() {
+async function filterByType() {
+  if (!isDataLoaded) {
+    await loadMorePokemon();
+    isDataLoaded = true;
+  }
+
   let selectedType = document.getElementById("type-filter").value;
   let search = document.getElementById("search").value.toLowerCase();
   let container = document.getElementById("pokemon-container");
   container.innerHTML = '';
 
-  filteredPokemonKeys = []; 
+  filteredPokemonKeys = [];
 
   for (let key in pokedex) {
     let p = pokedex[key];
     let types = p.types.map(t => t.type.name);
 
     if ((selectedType === "" || types.includes(selectedType)) && key.includes(search)) {
-      filteredPokemonKeys.push(key); 
-      container.innerHTML += createPokemonCard(p);
+      filteredPokemonKeys.push(key);
+      container.innerHTML += createPokemonCardTemplate(p);
     }
   }
 }
