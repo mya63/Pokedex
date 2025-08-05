@@ -43,9 +43,8 @@ async function fetchPokemon(name) {
 function renderPokedex() {
   let container = document.getElementById("pokemon-container");
   container.innerHTML = '';
-  for (let key in pokedex) container.innerHTML += createPokemonCard(pokedex[key]);
+  for (let key in pokedex) container.innerHTML += createPokemonCardTemplate(pokedex[key]);
 }
-
 
 function createPokemonCard(p) {
   return `
@@ -73,17 +72,9 @@ function showPokemon(name) {
 }
 
 function renderOverlay(p) {
-  document.getElementById("pokemon-details").innerHTML = `
-    <h2>${p.name.toUpperCase()}</h2>
-    <p>ID: #${p.id}</p>
-    <div class="types">${createTypeBadges(p.types)}</div>
-    <img src="${p.sprites.front_default}" alt="${p.name}">
-    <p>HP: ${p.stats[0].base_stat}</p>
-    <p>Height: ${p.height / 10} m</p>
-    <p>Weight: ${p.weight / 10} kg</p>`;
+  document.getElementById("pokemon-details").innerHTML = createOverlayTemplate(p);
   document.getElementById("pokemon-overlay").style.display = "flex";
 }
-
 
 function showPrevPokemon(e) {
   e.stopPropagation();
