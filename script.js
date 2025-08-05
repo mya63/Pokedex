@@ -4,6 +4,8 @@ let limit = 40;
 let isLoading = false;
 let currentPokemonIndex = 0;
 let pokemonKeys = [];
+let filteredPokemonKeys = [];
+
 
 
 function init() {
@@ -64,10 +66,11 @@ function createTypeBadges(types) {
 
 function showPokemon(name) {
   pokemonKeys = Object.keys(pokedex);
-  currentPokemonIndex = pokemonKeys.indexOf(name);
+  filterByType();
+  let list = filteredPokemonKeys.length > 0 ? filteredPokemonKeys : pokemonKeys;
+  currentPokemonIndex = list.indexOf(name);
   renderOverlay(pokedex[name]);
 }
-
 
 function renderOverlay(p) {
   document.getElementById("pokemon-details").innerHTML = `
@@ -84,17 +87,17 @@ function renderOverlay(p) {
 
 function showPrevPokemon(e) {
   e.stopPropagation();
-  currentPokemonIndex = (currentPokemonIndex - 1 + pokemonKeys.length) % pokemonKeys.length;
-  renderOverlay(pokedex[pokemonKeys[currentPokemonIndex]]);
+  let list = filteredPokemonKeys.length > 0 ? filteredPokemonKeys : pokemonKeys;
+  currentPokemonIndex = (currentPokemonIndex - 1 + list.length) % list.length;
+  renderOverlay(pokedex[list[currentPokemonIndex]]);
 }
-
 
 function showNextPokemon(e) {
   e.stopPropagation();
-  currentPokemonIndex = (currentPokemonIndex + 1) % pokemonKeys.length;
-  renderOverlay(pokedex[pokemonKeys[currentPokemonIndex]]);
+  let list = filteredPokemonKeys.length > 0 ? filteredPokemonKeys : pokemonKeys;
+  currentPokemonIndex = (currentPokemonIndex + 1) % list.length;
+  renderOverlay(pokedex[list[currentPokemonIndex]]);
 }
-
 
 function closeOverlay() {
   document.getElementById("pokemon-overlay").style.display = "none";
@@ -116,10 +119,14 @@ function filterByType() {
   let container = document.getElementById("pokemon-container");
   container.innerHTML = '';
 
+  filteredPokemonKeys = []; 
+
   for (let key in pokedex) {
     let p = pokedex[key];
     let types = p.types.map(t => t.type.name);
+
     if ((selectedType === "" || types.includes(selectedType)) && key.includes(search)) {
+      filteredPokemonKeys.push(key); 
       container.innerHTML += createPokemonCard(p);
     }
   }
