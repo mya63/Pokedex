@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pokedex | Developer Akademie</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body onload="init()">
+  <header>
+    <h1>Pokedex</h1>
+    <input type="text" id="search" placeholder="Suche Pokémon" oninput="filterPokemon()" />
+    <select id="type-filter" onchange="filterByType()">
+      <option value="">Alle Typen</option>
+      <option value="fire">Feuer</option>
+      <option value="water">Wasser</option>
+      <option value="grass">Pflanze</option>
+      <option value="electric">Elektro</option>
+      <option value="psychic">Psycho</option>
+      <option value="rock">Gestein</option>
+      <option value="ground">Boden</option>
+      <option value="ice">Eis</option>
+      <option value="fighting">Kampf</option>
+      <option value="poison">Gift</option>
+      <option value="ghost">Geist</option>
+      <option value="bug">Käfer</option>
+      <option value="dragon">Drache</option>
+      <option value="dark">Unlicht</option>
+      <option value="fairy">Fee</option>
+      <option value="steel">Stahl</option>
+      <option value="flying">Flug</option>
+      <option value="normal">Normal</option>
+    </select>
+  </header>
+
+  <main id="pokemon-container"></main>
+  <div id="loader" class="loader">Lade...</div>
+  <button id="scrollTopBtn" onclick="scrollToTop()">↑</button>
+
+  <div id="pokemon-overlay" class="overlay" onclick="closeOverlay()">
+    <button id="prev-btn" class="nav-btn" onclick="showPrevPokemon(event)">←</button>
+    <div id="pokemon-details" class="details" onclick="event.stopPropagation()"></div>
+    <button id="next-btn" class="nav-btn" onclick="showNextPokemon(event)">→</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

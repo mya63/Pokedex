@@ -1,0 +1,243 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f2f2f2;
+  max-width: 1920px;
+  margin-inline: auto;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #e3350d;
+  color: white;
+  padding: 1rem;
+}
+
+header input {
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+  width: 200px;
+}
+
+#pokemon-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pokemon-card {
+  background: white;
+  border-radius: 12px;
+  text-align: center;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.pokemon-card:hover {
+  transform: scale(1.05);
+}
+
+.pokemon-card img {
+  width: 100px;
+  height: 100px;
+}
+
+.pokemon-card h3 {
+  margin-top: 10px;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+.details {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 300px;
+  max-width: 90%;
+}
+
+.details img {
+  width: 150px;
+  height: 150px;
+}
+
+#load-more {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background: #e3350d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#load-more:hover {
+  background: #c12b0a;
+}
+
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  header input {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+.loader {
+  display: none;
+  text-align: center;
+  font-size: 18px;
+  color: #e3350d;
+  margin: 10px;
+}
+
+.loader::after {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 3px solid #e3350d;
+  border-top: 3px solid transparent;
+  border-radius: 50%;
+  margin-left: 8px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+#scrollTopBtn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #e3350d;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.3s;
+}
+
+#scrollTopBtn:hover {
+  background: #c12b0a;
+}
+
+header select {
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+  background: white;
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+.types {
+  margin-top: 8px;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.type {
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: white;
+  text-transform: capitalize;
+}
+
+.type.fire { background: #f08030; }
+.type.water { background: #6890f0; }
+.type.grass { background: #78c850; }
+.type.electric { background: #f8d030; }
+.type.psychic { background: #f85888; }
+.type.rock { background: #b8a038; }
+.type.ground { background: #e0c068; }
+.type.ice { background: #98d8d8; }
+.type.fighting { background: #c03028; }
+.type.poison { background: #a040a0; }
+.type.ghost { background: #705898; }
+.type.bug { background: #a8b820; }
+.type.dragon { background: #7038f8; }
+.type.dark { background: #705848; }
+.type.fairy { background: #ee99ac; }
+.type.steel { background: #b8b8d0; }
+.type.flying { background: #a890f0; }
+.type.normal { background: #a8a878; }
+
+.nav-btn {
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 10px 15px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+}
+
+#prev-btn { left: 20px; }
+#next-btn { right: 20px; }
+
+.nav-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+header h1 {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 24px;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+}
+
+.skeleton {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(90deg, #eee 25%, #ddd 50%, #eee 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+  border-radius: 8px;
+  margin: auto;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
