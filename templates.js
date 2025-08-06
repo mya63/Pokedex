@@ -19,3 +19,18 @@ function createOverlayTemplate(p) {
     <p>Height: ${p.height / 10} m</p>
     <p>Weight: ${p.weight / 10} kg</p>`;
 }
+
+function createPokemonCard(p) {
+  return `
+    <div class="pokemon-card" onclick="showPokemon('${p.name}')">
+      <h3>#${p.id} ${p.name}</h3>
+      <img src="${p.sprites.front_default}" alt="${p.name}" loading="lazy">
+      <div class="types">${createTypeBadges(p.types)}</div>
+    </div>`;
+}
+
+function createTypeBadges(types) {
+  let html = '';
+  for (let i = 0; i < types.length; i++) html += `<span class="type ${types[i].type.name}">${types[i].type.name}</span>`;
+  return html;
+}

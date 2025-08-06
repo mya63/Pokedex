@@ -9,13 +9,9 @@ let pokemonKeys = [];
 let filteredPokemonKeys = [];
 let isDataLoaded = false;
 
-
-
-
 function init() {
   loadMorePokemon().then(() => ensureScrollable());
 }
-
 
 async function loadMorePokemon() {
   if (isLoading) return;
@@ -30,7 +26,6 @@ async function loadMorePokemon() {
   }
 
   offset += limit;
-
 
   if (isFirstLoad) {
     limit = step;
@@ -49,40 +44,20 @@ async function init() {
   filterByType();
 }
 
-
 function ensureScrollable() {
   if (document.documentElement.scrollHeight <= window.innerHeight) loadMorePokemon();
 }
-
 
 async function fetchPokemon(name) {
   let res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
   pokedex[name] = await res.json();
 }
 
-
 function renderPokedex() {
   let container = document.getElementById("pokemon-container");
   container.innerHTML = '';
   for (let key in pokedex) container.innerHTML += createPokemonCardTemplate(pokedex[key]);
 }
-
-function createPokemonCard(p) {
-  return `
-    <div class="pokemon-card" onclick="showPokemon('${p.name}')">
-      <h3>#${p.id} ${p.name}</h3>
-      <img src="${p.sprites.front_default}" alt="${p.name}" loading="lazy">
-      <div class="types">${createTypeBadges(p.types)}</div>
-    </div>`;
-}
-
-
-function createTypeBadges(types) {
-  let html = '';
-  for (let i = 0; i < types.length; i++) html += `<span class="type ${types[i].type.name}">${types[i].type.name}</span>`;
-  return html;
-}
-
 
 function showPokemon(name) {
   pokemonKeys = Object.keys(pokedex);
@@ -115,7 +90,6 @@ function closeOverlay() {
   document.getElementById("pokemon-overlay").style.display = "none";
 }
 
-
 function filterPokemon() {
   let search = document.getElementById("search").value.trim().toLowerCase();
 
@@ -123,7 +97,6 @@ function filterPokemon() {
 
   filterByType();
 }
-
 
 async function filterByType() {
   if (!isDataLoaded) {
@@ -149,16 +122,13 @@ async function filterByType() {
   }
 }
 
-
 function showLoader() {
   document.getElementById("loader").style.display = "block";
 }
 
-
 function hideLoader() {
   document.getElementById("loader").style.display = "none";
 }
-
 
 window.onscroll = function () {
   let top = document.documentElement.scrollTop || document.body.scrollTop;
@@ -169,11 +139,9 @@ window.onscroll = function () {
   if (top + client >= height - 50) loadMorePokemon();
 };
 
-
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
-
 
 document.addEventListener("keydown", function (e) {
   if (document.getElementById("pokemon-overlay").style.display === "flex") {
