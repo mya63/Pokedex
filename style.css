@@ -167,7 +167,7 @@ header input {
 
 @media (min-width: 1921px) {
   #scrollTopBtn {
-    right: calc((100% - 1920px) / 2 + 20px);
+    right: calc((100% - 1920px) / 2 + 240px);
   }
 }
 
