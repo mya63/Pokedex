@@ -162,6 +162,13 @@ header input {
   cursor: pointer;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   transition: opacity 0.3s;
+  z-index: 100;
+}
+
+@media (min-width: 1921px) {
+  #scrollTopBtn {
+    right: calc((100% - 1920px) / 2 + 20px);
+  }
 }
 
 #scrollTopBtn:hover {
